@@ -1,22 +1,11 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.index')
 
-        <title>Laravel</title>
+@section('content')
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-
-       
-    </head>
     <body>
         <h1>home</h1>
 
-
-        <form action="{{ route("home.store") }}" method="post">
+        <form action="{{ route('home.store') }}" method="post">
             @csrf
             <label for="">name :
                 <input name="name" type="name">
@@ -31,13 +20,16 @@
             </label>
             <button>go</button>
         </form>
-        
 
-        <h1>test data seeders :</h1>
+
+        <h1>My DATA :</h1>
+        <hr>
         @foreach ($homes as $home)
-            <p>{{ $home->name }} <br> {{ $home->age }}</p>
+            <p>name:{{ $home->name }} , email :{{ $home->email }} , password: {{ $home->password }}</p>
+            <a href="{{ route('home.show', $home) }}">update</a>
+            <hr>
         @endforeach
-            
-        
+
+
     </body>
-</html>
+@endsection

@@ -16,7 +16,7 @@ class HomeController extends Controller
     }
 
 
-    
+
 
     public function store(Request $request)
     {
@@ -28,17 +28,40 @@ class HomeController extends Controller
         ]);
         // we create  a row  in  our database
         // we call our model
-        
+
         Home::create([
-            "name"=> $request->name,
-            "email"=> $request->email,
-            "password"=> $request->password,
+            "name" => $request->name,
+            "email" => $request->email,
+            "password" => $request->password,
 
         ]);
 
-// we redirect the user to specefic page 
+        // we redirect the user to specefic page 
 
         return redirect()->back();
 
+    }
+
+
+    public function show(Home $home)
+    {
+        return view("home.components.home_show", compact("home"));
+    }
+
+    public function update(Request $request, Home $home)
+    {
+        request()->validate([
+            "name"=> "required",
+            "email"=> "required",
+            "password"=> "required"
+        ]);
+
+        $home->update([
+            "name"=> $request->name,
+            "email"=> $request->email,
+            "password"=> $request->password,
+        ]);
+
+        return redirect()->route("home.index");
     }
 }

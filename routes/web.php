@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
 
-});
 Route::get("/", [HomeController::class, "index"])->name("home.index");
+Route::get("/home/show/{home}", [HomeController::class,"show"])->name("home.show");
+
+Route::put("/home/update/{home}", [HomeController::class,"update"])->name("home.update");
 
 Route::post("/student/store" , [HomeController::class , "store"])->name("home.store");
